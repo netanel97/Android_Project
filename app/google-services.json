@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "569569093294",
+    "project_id": "finalproject-1ba3a",
+    "firebase_url": "https://finalproject-1ba3a-default-rtdb.europe-west1.firebasedatabase.app/",
+    "storage_bucket": "finalproject-1ba3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569569093294:android:3c283ca7994f7ffa6a6f3f",
+        "android_client_info": {
+          "package_name": "com.Netanel.glutenfreerestaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569569093294-vftrsoffm3hsn1t0u1e0h29pc3qciehu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDa-Wsr9-CgGWV9kuo7Fp-S8APigtGYzGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569569093294-vftrsoffm3hsn1t0u1e0h29pc3qciehu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
