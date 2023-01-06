@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
@@ -13,7 +11,6 @@ import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.ActivityHomeBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textview.MaterialTextView;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

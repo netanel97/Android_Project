@@ -1,17 +1,20 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.home;
 
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,17 +25,12 @@ import com.Netanel.glutenfreerestaurant.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
-    private RecyclerView mRecyclerView;
+public class HomeFragment extends Fragment{
     private HomeRecyclerViewAdapter mAdapter;
     private HomeViewModel homeViewModel;
     private RecyclerView searchResultsRV;
-
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
-    }
-
     private FragmentHomeBinding binding;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         searchResultsRV = binding.searchResultsRV;
         homeViewModel.getCategories().observe(getViewLifecycleOwner(),observer);
         mAdapter = new HomeRecyclerViewAdapter(getContext());
@@ -55,9 +52,23 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         searchResultsRV.setLayoutManager(linearLayoutManager);
         searchResultsRV.setAdapter(mAdapter);
+        mAdapter.setMovieItemClickListener(new HomeRecyclerViewAdapter.FoodItemClickListener() {
+            @Override
+            public void changeScreen(Category category) {
+                Log.d("Cat is:", "changeScreen: " +category);
+                String categoryId = category.getKey();
+                Bundle args = new Bundle();
+                args.putString("CategoryId", categoryId);
+                Log.d("Saving Cat Id", "changeScreen: " + categoryId);
+                final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
+                navController.navigate(R.id.nav_recipe_list,args);
 
+            }
+        });
         return root;
     }
+
+
 
     Observer<ArrayList<Category>> observer = new Observer<ArrayList<Category>>(){
 
@@ -71,4 +82,6 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+
 }

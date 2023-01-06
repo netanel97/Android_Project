@@ -11,11 +11,16 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
         android:id="@+id/nav_cart"
         android:name="com.Netanel.glutenfreerestaurant.Activites.ui.cart.CartFragment"
         android:label="@string/menu_cart"
         tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/nav_recipe_list"
+        android:name="com.Netanel.glutenfreerestaurant.Activites.ui.food.FoodFragment"
+        tools:layout="@layout/fragment_food_list" />
 
     <fragment
         android:id="@+id/nav_orders"
