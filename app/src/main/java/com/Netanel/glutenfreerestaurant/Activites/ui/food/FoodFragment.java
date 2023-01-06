@@ -15,8 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.Netanel.glutenfreerestaurant.Adapter.FoodRycyclerViewAdapter;
 import com.Netanel.glutenfreerestaurant.Category;
 import com.Netanel.glutenfreerestaurant.Food;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentFoodListBinding;
@@ -28,13 +30,14 @@ public class FoodFragment extends Fragment {
     private FragmentFoodListBinding binding;
     private RecyclerView foodRV;
     private FoodViewModel foodViewModel;
+    private FoodRycyclerViewAdapter mAdapter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        foodViewModel =
-                new ViewModelProvider(this).get(FoodViewModel.class);
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        //foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+//    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +47,13 @@ public class FoodFragment extends Fragment {
         foodRV = binding.listFood;
         String categoryId = getArguments().getString("CategoryId");
         Log.d("Category Selected: ", ""+categoryId);
+        foodViewModel = new FoodViewModel(categoryId);
         foodViewModel.getFoodItems().observe(getViewLifecycleOwner(),observer);
-        final RecyclerView recyclerView = binding.listFood;
+        mAdapter = new FoodRycyclerViewAdapter(getContext());
+        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        foodRV.setLayoutManager(linearLayoutManager);
+        foodRV.setAdapter(mAdapter);
         return root;
     }
 
@@ -53,7 +61,7 @@ public class FoodFragment extends Fragment {
 
         @Override
         public void onChanged(ArrayList<Food> foodItems) {
-            mAdapter.updateFoodItems(foodItems);
+            mAdapter.updateFoods(foodItems);
         }
     };
     @Override

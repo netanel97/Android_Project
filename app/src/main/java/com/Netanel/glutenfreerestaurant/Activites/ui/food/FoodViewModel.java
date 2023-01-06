@@ -1,5 +1,7 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.food;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -36,6 +38,7 @@ public class FoodViewModel extends ViewModel {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 foods.add(snapshot.getValue(Food.class));
                 mFoods.setValue(foods);
+                Log.d("Foods in pasta",foods.toString());
             }
 
             @Override
