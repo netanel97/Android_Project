@@ -1,4 +1,4 @@
-package com.Netanel.glutenfreerestaurant.Activites.ui.slideshow;
+package com.Netanel.glutenfreerestaurant.Activites.ui.orders;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

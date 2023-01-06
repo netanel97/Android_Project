@@ -5,7 +5,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_menu"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu"
             android:iconTint="@color/white"
             android:title="Menu" />
@@ -19,13 +19,14 @@
             android:icon="@drawable/ic_timer"
             android:iconTint="@color/white"
             android:title="Orders" />
+    </group>
         <item
             android:id="@+id/nav_signOut"
             android:icon="@drawable/ic_exit"
             android:iconTint="@color/white"
+            android:onClick="signOut"
             android:title="Sign out" />
 
 
 
-    </group>
 </menu>

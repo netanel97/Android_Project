@@ -1,51 +1,66 @@
 package com.Netanel.glutenfreerestaurant.Activites;
-
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-
 import com.Netanel.glutenfreerestaurant.R;
-import com.bumptech.glide.Glide;
-import com.google.android.material.imageview.ShapeableImageView;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private ShapeableImageView main_IMG_background;
-    private Button main_BTN_signUp;
-    private Button main_BTN_signIn;
+    private FirebaseAuth mAuth;
+    public static FirebaseUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_main);
-        initViews();
-        Glide.with(this).load(R.drawable.mainbackground).into(main_IMG_background);
-
-        main_BTN_signIn.setOnClickListener(view ->switchScreen(true));
-        main_BTN_signUp.setOnClickListener(view -> switchScreen(false));
     }
-   /*
-   if screen = True --> SignIn else SignUp
-    */
-    private void switchScreen(boolean screen) {
-        if(screen){
-            Intent intent = new Intent(this, SignInActivity.class);
-            startActivity(intent);
-            finish();
+
+
+    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
+            new FirebaseAuthUIActivityResultContract(),
+            result -> onSignInResult(result)
+    );
+    private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+        switchScreen();
+    }
+
+    private void login(FirebaseUser currentUser) {
+        if(currentUser == null) {
+            // Choose authentication providers
+            List<AuthUI.IdpConfig> providers = Arrays.asList(
+                    new AuthUI.IdpConfig.EmailBuilder().build(),
+                    new AuthUI.IdpConfig.GoogleBuilder().build());
+
+            // Create and launch sign-in intent
+            Intent signInIntent = AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(providers).setLogo(R.drawable.glutenfree).setTheme(R.style.Theme_GlutenFreeRestaurant_AppBarOverlay).setIsSmartLockEnabled(false)
+                    .build();
+            signInLauncher.launch(signInIntent);
         }
         else{
-            Intent intent = new Intent(this, SignUpActivity.class);
-            startActivity(intent);
-            finish();
-
+            switchScreen();
+        }
         }
 
+    private void switchScreen() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    private void initViews() {
-        main_IMG_background = findViewById(R.id.main_IMG_background);
-        main_BTN_signUp = findViewById(R.id.main_BTN_signUp);
-        main_BTN_signIn = findViewById(R.id.main_BTN_signIn);
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = mAuth.getCurrentUser();
+        login(currentUser);
     }
 }

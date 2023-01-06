@@ -1,4 +1,4 @@
-package com.Netanel.glutenfreerestaurant.Activites.ui.gallery;
+package com.Netanel.glutenfreerestaurant.Activites.ui.cart;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
