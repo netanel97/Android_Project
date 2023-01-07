@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.Netanel.glutenfreerestaurant.Category;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<ArrayList<Category>> mCategories;
-    private final String category = "Category";
+    private final String category = Constants.CATEGORY;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference(category);
 

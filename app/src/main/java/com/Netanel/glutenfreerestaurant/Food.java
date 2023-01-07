@@ -5,16 +5,21 @@ public class Food {
     private String description;
     private String image;
     private String price;
+    private String key;
 
     public Food(){}
 
 
-    public Food(String name, String description, String image, String price, String menuId) {
+    public Food(String name, String description, String image, String price) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
 
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
@@ -29,24 +34,14 @@ public class Food {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
 }

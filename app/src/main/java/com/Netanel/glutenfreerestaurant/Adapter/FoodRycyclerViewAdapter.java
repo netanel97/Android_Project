@@ -1,6 +1,7 @@
 package com.Netanel.glutenfreerestaurant.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class FoodRycyclerViewAdapter extends RecyclerView.Adapter<FoodRycyclerViewAdapter.FoodViewHolder> {
     private Context context;
     private ArrayList<Food> foods;
-    // TODO: 1/6/2023 itemclick
+    private ItemClickListener listener;
     public FoodRycyclerViewAdapter(Context context){
         this.context = context;
         foods = new ArrayList<>();
@@ -35,13 +36,18 @@ public class FoodRycyclerViewAdapter extends RecyclerView.Adapter<FoodRycyclerVi
         return foodViewHolder;
     }
 
+    public FoodRycyclerViewAdapter setItemFoodClickListener(ItemClickListener itemFoodClickListener){
+        this.listener = itemFoodClickListener;
+        return this;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
         Food item = getItem(position);
+        item.setKey(String.valueOf(position));
         holder.item_TXT_listName.setText(item.getName());
         Glide.with(context)
                 .load(item.getImage())
-                .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.item_IMG_listcard);
     }
 
@@ -61,6 +67,12 @@ public class FoodRycyclerViewAdapter extends RecyclerView.Adapter<FoodRycyclerVi
     }
 
 
+    public interface ItemClickListener{
+        void changeScreenItem(Food food);
+    }
+
+
+
     class FoodViewHolder extends RecyclerView.ViewHolder {
         private TextView item_TXT_listName;
         private ImageView item_IMG_listcard;
@@ -71,6 +83,8 @@ public class FoodRycyclerViewAdapter extends RecyclerView.Adapter<FoodRycyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    listener.changeScreenItem(foods.get(position));
 
                 }
             });

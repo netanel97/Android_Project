@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Netanel.glutenfreerestaurant.Adapter.HomeRecyclerViewAdapter;
 import com.Netanel.glutenfreerestaurant.Category;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentHomeBinding;
 
@@ -52,16 +53,15 @@ public class HomeFragment extends Fragment{
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         searchResultsRV.setLayoutManager(linearLayoutManager);
         searchResultsRV.setAdapter(mAdapter);
-        mAdapter.setMovieItemClickListener(new HomeRecyclerViewAdapter.FoodItemClickListener() {
+        mAdapter.setCategoryItemClickListener(new HomeRecyclerViewAdapter.FoodItemClickListener() {
             @Override
             public void changeScreen(Category category) {
-                Log.d("Cat is:", "changeScreen: " +category);
                 String categoryId = category.getKey();
                 Bundle args = new Bundle();
-                args.putString("CategoryId", categoryId);
+                args.putString(Constants.ARGS_CATEGORYID, categoryId);
                 Log.d("Saving Cat Id", "changeScreen: " + categoryId);
                 final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
-                navController.navigate(R.id.nav_recipe_list,args);
+                navController.navigate(R.id.nav_food_list,args);
 
             }
         });

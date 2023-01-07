@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.Netanel.glutenfreerestaurant.Category;
 import com.Netanel.glutenfreerestaurant.Food;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 
 public class FoodViewModel extends ViewModel {
     private final MutableLiveData<ArrayList<Food>> mFoods;
-    private final String food = "Food";
+    private final String food = Constants.FOOD;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference(food);
 
@@ -32,13 +33,14 @@ public class FoodViewModel extends ViewModel {
     public FoodViewModel(String categoryId) {
         this();
 
+
         ArrayList<Food> foods = new ArrayList<>();
         databaseReference.child(categoryId).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                foods.add(snapshot.getValue(Food.class));
+                Food food = snapshot.getValue(Food.class);
+                foods.add(food);
                 mFoods.setValue(foods);
-                Log.d("Foods in pasta",foods.toString());
             }
 
             @Override

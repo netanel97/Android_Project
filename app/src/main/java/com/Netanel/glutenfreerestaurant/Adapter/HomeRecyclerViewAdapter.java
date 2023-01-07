@@ -37,7 +37,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         return homeViewHolder;
     }
 
-    public HomeRecyclerViewAdapter setMovieItemClickListener(FoodItemClickListener foodItemClickListener) {
+    public HomeRecyclerViewAdapter setCategoryItemClickListener(FoodItemClickListener foodItemClickListener) {
         this.listener = foodItemClickListener;
         return this;
     }
@@ -48,7 +48,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.item_TXT_name.setText(item.getName());
         Glide.with(context)
                 .load(item.getImage())
-                .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.item_IMG_card);
     }
 

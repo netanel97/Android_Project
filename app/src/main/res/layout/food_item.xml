@@ -16,7 +16,6 @@
         <ImageView
             android:id="@+id/item_IMG_listcard"
             android:scaleType="centerCrop"
-            android:src="#0fffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <TextView

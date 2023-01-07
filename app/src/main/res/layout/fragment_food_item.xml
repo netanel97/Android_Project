@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3A3A3A"
+    android:alpha="0.8"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/food_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/overlayBackground"
+
+        >
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/food_collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="#0e0d0e">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/food_IMG_foodItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/food_bar_layout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/food_TXT_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:maxLines="2"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/food_TXT_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:textSize="25sp"
+                android:maxLines="2"
+                android:layout_below="@+id/food_TXT_name"
+                android:text="description"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/food_TXT_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/food_TXT_description"
+                android:layout_marginStart="30dp"
+                android:maxLines="1"
+                android:text="price $"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
