@@ -1,29 +1,24 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.itemFood;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentFoodItemBinding;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
 public class ItemFoodFragment extends Fragment {
     private FragmentFoodItemBinding binding;
-    private TextView foodItem_TXT_foodDetail;
     private ShapeableImageView food_IMG_foodItem;
+    private FloatingActionButton foodItem_BTN_cart;
     private MaterialTextView food_TXT_name;
     private MaterialTextView food_TXT_description;
     private MaterialTextView food_TXT_price;
@@ -37,8 +32,6 @@ public class ItemFoodFragment extends Fragment {
 
         binding = FragmentFoodItemBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-//        //detailFood = getArguments().getString(Constants.ARG_ITEMFOOD);
-//        detailFood = getArguments().getString("bdika");
         description = getArguments().getString(Constants.ARG_FOOD_Description);
         image = getArguments().getString(Constants.ARG_FOOD_IMG);
         name = getArguments().getString(Constants.ARG_FOOD_NAME);
@@ -49,6 +42,12 @@ public class ItemFoodFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        findViews(view);
+        putDetailOnScreen();
+
+    }
+
+    private void findViews(View view) {
         food_IMG_foodItem = view.findViewById(R.id.food_IMG_foodItem);
         Glide.with(getContext())
                 .load(image)
@@ -56,9 +55,7 @@ public class ItemFoodFragment extends Fragment {
         food_TXT_name = view.findViewById(R.id.food_TXT_name);
         food_TXT_description = view.findViewById(R.id.food_TXT_description);
         food_TXT_price = view.findViewById(R.id.food_TXT_price);
-
-        putDetailOnScreen();
-
+        foodItem_BTN_cart = view.findViewById(R.id.foodItem_BTN_cart);
     }
 
     private void putDetailOnScreen() {

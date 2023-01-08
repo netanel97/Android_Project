@@ -1,12 +1,11 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.home;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.Netanel.glutenfreerestaurant.Category;
+import com.Netanel.glutenfreerestaurant.Model.Category;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

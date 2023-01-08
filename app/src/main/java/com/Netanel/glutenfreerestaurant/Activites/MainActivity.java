@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    public static FirebaseUser currentUser;
+    public static FirebaseUser currentUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

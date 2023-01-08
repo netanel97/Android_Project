@@ -1,4 +1,4 @@
-package com.Netanel.glutenfreerestaurant;
+package com.Netanel.glutenfreerestaurant.Model;
 
 public class Category {
     private String name;

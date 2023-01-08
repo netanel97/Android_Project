@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Netanel.glutenfreerestaurant.Adapter.HomeRecyclerViewAdapter;
-import com.Netanel.glutenfreerestaurant.Category;
+import com.Netanel.glutenfreerestaurant.Model.Category;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentHomeBinding;

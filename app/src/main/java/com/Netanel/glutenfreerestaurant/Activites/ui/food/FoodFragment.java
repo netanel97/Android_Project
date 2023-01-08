@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Netanel.glutenfreerestaurant.Adapter.FoodRycyclerViewAdapter;
-import com.Netanel.glutenfreerestaurant.Food;
+import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentFoodListBinding;

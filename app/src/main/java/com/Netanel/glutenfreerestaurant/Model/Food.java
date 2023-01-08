@@ -1,4 +1,4 @@
-package com.Netanel.glutenfreerestaurant;
+package com.Netanel.glutenfreerestaurant.Model;
 
 public class Food {
     private String name;
