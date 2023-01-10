@@ -26,6 +26,7 @@ public class ItemFoodFragment extends Fragment {
     private String image;
     private String name;
     private String price;
+    //currentUser
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void signOut(MenuItem item) {
+        Log.d("this is uid", "signOut:" + MainActivity.currentUser.getUid());
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

@@ -59,7 +59,6 @@ public class HomeFragment extends Fragment{
                 String categoryId = category.getKey();
                 Bundle args = new Bundle();
                 args.putString(Constants.ARGS_CATEGORYID, categoryId);
-                Log.d("Saving Cat Id", "changeScreen: " + categoryId);
                 final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
                 navController.navigate(R.id.nav_food_list,args);
 
