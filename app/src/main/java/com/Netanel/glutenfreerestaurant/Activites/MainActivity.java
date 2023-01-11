@@ -1,20 +1,22 @@
 package com.Netanel.glutenfreerestaurant.Activites;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
-import com.Netanel.glutenfreerestaurant.MyUtils.MySignal;
 import com.Netanel.glutenfreerestaurant.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +28,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public static FirebaseUser currentUser = null;
+    public static UserDB userDB;
     private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference("UserDB");
+    private boolean check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,44 @@ public class MainActivity extends AppCompatActivity {
             result -> onSignInResult(result)
     );
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+    }
 
-        switchScreen();
+    private void createNewUserDB() {
+        userDB = new UserDB();
+        userDB.setName(currentUser.getDisplayName());
+        reference.child(currentUser.getUid()).setValue(userDB);
+//        reference.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                reference.setValue(currentUser.getUid());
+//                reference = reference.child(currentUser.getUid());
+//                reference.setValue(userDB);
+//                Log.d("adding a new person", "onChildAdded: "+ userDB.toString());
+//
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
     }
 
     private void login(FirebaseUser currentUser) {
@@ -59,39 +99,44 @@ public class MainActivity extends AppCompatActivity {
                     .setAvailableProviders(providers).setLogo(R.drawable.glutenfree).setTheme(R.style.Theme_GlutenFreeRestaurant_AppBarOverlay).setIsSmartLockEnabled(false)
                     .build();
             signInLauncher.launch(signInIntent);
+            check = true;
         }
         else{
+            // TODO: 1/11/2023 need to check how to enter to the value here without boolean..
+            if(check)
+                createNewUserDB();
             loadUserFromDB();
             switchScreen();
         }
         }
 
+    /**
+     * Getting the current user by uid
+     */
     private void loadUserFromDB() {
-        /**
-         * Getting the current user by uid
-         */
         reference = reference.child(currentUser.getUid());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserDB user = snapshot.getValue(UserDB.class);
-                Log.d("userDetail", "onDataChange: " + user.toString());
+                userDB = snapshot.getValue(UserDB.class);
+                switchScreen();
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
     }
 
     private void switchScreen() {
-//        user = new UserDB();
+        if (userDB == null)
+            userDB = new UserDB();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
     }
+
 
     @Override
     protected void onStart() {

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Order {
     private String orderNumber;
-    private ArrayList<Food> allfoods;
+    private ArrayList<Food> allFoods;
     private double lat = 33.4;
     private double lon = 32.4;
     private long timeStamp;
 
     public Order() {
-        allfoods = new ArrayList<Food>();
+        allFoods = new ArrayList<Food>();
     }
 
     public String getOrderNumber() {
@@ -20,19 +20,19 @@ public class Order {
     adding specific food to the list
      **/
     public void addFood(Food food){
-        allfoods.add(food);
+        allFoods.add(food);
     }
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 
-    public ArrayList<Food> getAllfoods() {
-        return allfoods;
+    public ArrayList<Food> getAllFoods() {
+        return allFoods;
     }
 
-    public void setAllfoods(ArrayList<Food> allfoods) {
-        this.allfoods = allfoods;
+    public void setAllFoods(ArrayList<Food> allFoods) {
+        this.allFoods = allFoods;
     }
 
     public double getLat() {
@@ -49,5 +49,16 @@ public class Order {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderNumber='" + orderNumber + '\'' +
+                ", allFoods=" + allFoods +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                ", timeStamp=" + timeStamp +
+                '}';
     }
 }

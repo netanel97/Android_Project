@@ -1,17 +1,19 @@
-package com.Netanel.glutenfreerestaurant.Activites;
+package com.Netanel.glutenfreerestaurant.Model;
 
 import com.Netanel.glutenfreerestaurant.Model.Order;
 
 import java.util.ArrayList;
 
 public class UserDB {
-    private ArrayList<Order> allOrders;
-    private Order currentOrder;
+    private ArrayList<Order> allOrders = null;
+    private Order currentOrder = null;
+    private String name;
 
 
 
     public UserDB() {
         this.allOrders = new ArrayList<Order>();
+        this.currentOrder = new Order();
     }
 
     public ArrayList<Order> getAllOrders() {
@@ -31,6 +33,13 @@ public class UserDB {
     }
 
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public void addOrder(Order order){
         allOrders.add(order);
