@@ -53,49 +53,6 @@ public class MainActivity extends AppCompatActivity {
         userDB = new UserDB();
         userDB.setName(currentUser.getDisplayName());
         reference.child(currentUser.getUid()).setValue(userDB);
-        Log.d("Created child", "createNewUserDB: " + currentUser.getUid());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                reference.setValue(currentUser.getUid());
-                reference = reference.child(currentUser.getUid());
-                reference.setValue(userDB);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-//        reference.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                reference.setValue(currentUser.getUid());
-//                reference = reference.child(currentUser.getUid());
-//                reference.setValue(userDB);
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
     }
 
     private void login(FirebaseUser currentUser) {
