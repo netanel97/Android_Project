@@ -53,27 +53,13 @@ public class MainActivity extends AppCompatActivity {
         userDB = new UserDB();
         userDB.setName(currentUser.getDisplayName());
         reference.child(currentUser.getUid()).setValue(userDB);
-        reference.addChildEventListener(new ChildEventListener() {
+        Log.d("Created child", "createNewUserDB: " + currentUser.getUid());
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 reference.setValue(currentUser.getUid());
                 reference = reference.child(currentUser.getUid());
                 reference.setValue(userDB);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
             }
 
             @Override
@@ -81,6 +67,34 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//        reference.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                reference.setValue(currentUser.getUid());
+//                reference = reference.child(currentUser.getUid());
+//                reference.setValue(userDB);
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
     }
 
@@ -117,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadUserFromDB() {
         reference = reference.child(currentUser.getUid());
-        Log.d("reference", "loadUserFromDB: " + reference.getKey());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -130,6 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//        Log.d("Created child", "createNewUserDB: " + currentUser.getUid());
+
+        Log.d("after login check uid", "createNewUserDB: " + currentUser.getUid());
+
     }
 
     private void switchScreen() {
