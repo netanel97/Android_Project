@@ -89,7 +89,7 @@
                 android:backgroundTint="@color/white"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/cart"/>
+                android:src="@drawable/ic_add_to_cart"/>
         </RelativeLayout>
                 </LinearLayout>
 

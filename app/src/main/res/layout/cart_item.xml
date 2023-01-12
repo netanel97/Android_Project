@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    android:elevation="4dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFF000">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cart_IMG_FoodItem"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_launcher_foreground"
+            android:scaleType="centerCrop"
+            android:background="#0000FF"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/cart_LBL_FoodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="bottom"
+            android:maxLines="2"
+            android:minLines="2"
+            android:text="Food name"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/cart_IMG_FoodItem"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/cart_LBL_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cart_LBL_FoodName"
+            android:layout_alignStart="@id/cart_LBL_FoodName"
+            android:layout_marginTop="4dp"
+            android:text="price"
+            android:textSize="12sp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cart_BTN_deleteItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
+            android:layout_below="@+id/cart_LBL_price"
+            android:src="@drawable/ic_delete"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

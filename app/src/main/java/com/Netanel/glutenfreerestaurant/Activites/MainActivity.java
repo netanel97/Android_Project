@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public static FirebaseUser currentUser = null;
     public static UserDB userDB;
-    private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference("UserDB");
+    private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference(Constants.USER_DB);
     private boolean check = false;
 
     @Override
@@ -51,37 +53,34 @@ public class MainActivity extends AppCompatActivity {
         userDB = new UserDB();
         userDB.setName(currentUser.getDisplayName());
         reference.child(currentUser.getUid()).setValue(userDB);
-//        reference.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                reference.setValue(currentUser.getUid());
-//                reference = reference.child(currentUser.getUid());
-//                reference.setValue(userDB);
-//                Log.d("adding a new person", "onChildAdded: "+ userDB.toString());
-//
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                reference.setValue(currentUser.getUid());
+                reference = reference.child(currentUser.getUid());
+                reference.setValue(userDB);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -103,10 +102,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             // TODO: 1/11/2023 need to check how to enter to the value here without boolean..
-            if(check)
+            if(check) {
                 createNewUserDB();
-            loadUserFromDB();
-            switchScreen();
+                switchScreen();
+            }
+            else {
+                loadUserFromDB();
+            }
         }
         }
 
@@ -115,16 +117,17 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadUserFromDB() {
         reference = reference.child(currentUser.getUid());
+        Log.d("reference", "loadUserFromDB: " + reference.getKey());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userDB = snapshot.getValue(UserDB.class);
                 switchScreen();
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

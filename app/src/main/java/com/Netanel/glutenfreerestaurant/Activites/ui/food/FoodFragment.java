@@ -26,13 +26,6 @@ public class FoodFragment extends Fragment {
     private FoodViewModel foodViewModel;
     private FoodRycyclerViewAdapter mAdapter;
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        //foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
-//    }
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,11 +44,7 @@ public class FoodFragment extends Fragment {
             @Override
             public void changeScreenItem(Food food) {
                 Bundle args = new Bundle();
-                args.putString(Constants.ARG_FOOD_Description,food.getDescription());
-                args.putString(Constants.ARG_FOOD_NAME,food.getName());
-                args.putString(Constants.ARG_PRICE,food.getPrice());
-                args.putString(Constants.ARG_FOOD_IMG,food.getImage());
-
+                args.putParcelable(Constants.FOOD_DATA,food);
                 final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
                 navController.navigate(R.id.nav_itemFood,args);//moving to..
             }
