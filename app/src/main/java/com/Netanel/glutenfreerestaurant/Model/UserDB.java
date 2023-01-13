@@ -26,7 +26,14 @@ public class UserDB {
     public Order getCurrentOrder() {
         return currentOrder;
     }
+    public String totalPrice(){
+        int totalPrice = 0;
+        for (int i = 0; i < currentOrder.getAllFoods().size(); i++) {
+            totalPrice += Integer.parseInt(currentOrder.getAllFoods().get(i).getPrice());
 
+        }
+        return Integer.toString(totalPrice);
+    }
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
     }

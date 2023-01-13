@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             // Create and launch sign-in intent
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
-                    .setAvailableProviders(providers).setLogo(R.drawable.glutenfree).setTheme(R.style.Theme_GlutenFreeRestaurant_AppBarOverlay).setIsSmartLockEnabled(false)
+                    .setAvailableProviders(providers).setLogo(R.drawable.glutenfree).setIsSmartLockEnabled(false)
                     .build();
             signInLauncher.launch(signInIntent);
             check = true;

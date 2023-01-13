@@ -78,13 +78,10 @@ public class FoodRycyclerViewAdapter extends RecyclerView.Adapter<FoodRycyclerVi
             super(itemView);
             item_IMG_listcard = itemView.findViewById(R.id.item_IMG_listcard);
             item_TXT_listName = itemView.findViewById(R.id.item_TXT_listName);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = getAdapterPosition();
-                    listener.changeScreenItem(foods.get(position));
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                listener.changeScreenItem(foods.get(position));
 
-                }
             });
         }
     }

@@ -1,19 +1,20 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.itemFood;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
-import com.Netanel.glutenfreerestaurant.Model.Order;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
+import com.Netanel.glutenfreerestaurant.MyUtils.MySignal;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentFoodItemBinding;
 import com.bumptech.glide.Glide;
@@ -59,25 +60,11 @@ public class ItemFoodFragment extends Fragment {
         foodItem_BTN_cart.setOnClickListener(view1 -> {
 
             MainActivity.userDB.getCurrentOrder().addFood(food);//adding the current food to the currentOrder
-            MainActivity.userDB.addOrder(MainActivity.userDB.getCurrentOrder());
-            reference = reference.child(MainActivity.currentUser.getUid());
-
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    reference.setValue(MainActivity.userDB);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            MySignal.getInstance().toast("Item Added");
 
         });
 
     }
-
     private void findViews(View view) {
         food_IMG_foodItem = view.findViewById(R.id.food_IMG_foodItem);
         Glide.with(getContext())

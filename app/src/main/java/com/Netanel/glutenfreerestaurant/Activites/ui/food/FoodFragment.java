@@ -34,7 +34,9 @@ public class FoodFragment extends Fragment {
         foodRV = binding.listFood;
         String categoryId = getArguments().getString(Constants.ARGS_CATEGORYID);
         foodViewModel = new FoodViewModel(categoryId);
+
         foodViewModel.getFoodItems().observe(getViewLifecycleOwner(),observer);
+
         mAdapter = new FoodRycyclerViewAdapter(getContext());
         LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
