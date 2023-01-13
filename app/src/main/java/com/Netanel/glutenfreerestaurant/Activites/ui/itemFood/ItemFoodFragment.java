@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+
 
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
@@ -21,10 +20,9 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
+
 
 public class ItemFoodFragment extends Fragment {
     private FragmentFoodItemBinding binding;
@@ -58,7 +56,9 @@ public class ItemFoodFragment extends Fragment {
         putDetailOnScreen();
 
         foodItem_BTN_cart.setOnClickListener(view1 -> {
-
+//            if(MainActivity.userDB.getCurrentOrder() == null){
+//                MainActivity.userDB.setCurrentOrder(new Order());
+//            }
             MainActivity.userDB.getCurrentOrder().addFood(food);//adding the current food to the currentOrder
             MySignal.getInstance().toast("Item Added");
 

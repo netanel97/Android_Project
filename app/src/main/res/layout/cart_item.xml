@@ -44,7 +44,7 @@
             android:layout_alignStart="@id/cart_LBL_FoodName"
             android:layout_marginTop="4dp"
             android:text="price"
-            android:textSize="12sp"/>
+            android:textSize="20sp"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/cart_BTN_deleteItem"

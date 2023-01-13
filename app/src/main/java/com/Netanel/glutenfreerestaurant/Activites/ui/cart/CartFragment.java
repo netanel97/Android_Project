@@ -11,13 +11,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Adapter.CartRycyclerViewAdapter;
+import com.Netanel.glutenfreerestaurant.Model.Order;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
+import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentCartBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
     private CartRycyclerViewAdapter mAdapter;
     private RecyclerView cartRV;
+    private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference(Constants.USER_DB);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,27 +47,36 @@ public class CartFragment extends Fragment {
             mAdapter.updateCart(MainActivity.userDB.getCurrentOrder().getAllFoods());
             checkEmptyCart();
         });
-
-
-
-
-
-//            MainActivity.userDB.addOrder(MainActivity.userDB.getCurrentOrder());
-//            reference = reference.child(MainActivity.currentUser.getUid());
-//
-//            reference.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    reference.setValue(MainActivity.userDB);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            });
+        binding.cartBTNCheckOut.setOnClickListener(view ->checkOut());
 
         return root;
+    }
+
+    private void checkOut() {
+        // TODO: 1/13/2023 to insure the lat + lon + orderNumber
+        MainActivity.userDB.getCurrentOrder().setTimeStamp(15);
+        MainActivity.userDB.addOrder(MainActivity.userDB.getCurrentOrder());
+        reference = reference.child(MainActivity.currentUser.getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reference.setValue(MainActivity.userDB);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        clearCheckOut();
+
+
+    }
+
+    private void clearCheckOut() {
+        MainActivity.userDB.setCurrentOrder(new Order());
+        mAdapter.updateCart(MainActivity.userDB.getCurrentOrder().getAllFoods());
+        checkEmptyCart();
     }
 
     private void checkEmptyCart() {
