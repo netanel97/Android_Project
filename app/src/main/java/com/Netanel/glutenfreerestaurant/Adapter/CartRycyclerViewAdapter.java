@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.Model.Order;
+import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.R;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -55,12 +56,12 @@ public class CartRycyclerViewAdapter extends RecyclerView.Adapter<CartRycyclerVi
                 .into(holder.cart_IMG_FoodItem);
     }
     private Food getItem(int position) {
-        return MainActivity.userDB.getCurrentOrder().getAllFoods().get(position);
+        return UserDB.getInstance().getCurrentOrder().getAllFoods().get(position);
     }
 
     @Override
     public int getItemCount() {
-        return MainActivity.userDB.getCurrentOrder().getAllFoods() == null ? 0 : MainActivity.userDB.getCurrentOrder().getAllFoods().size();
+        return UserDB.getInstance().getCurrentOrder().getAllFoods() == null ? 0 : UserDB.getInstance().getCurrentOrder().getAllFoods().size();
     }
 
 

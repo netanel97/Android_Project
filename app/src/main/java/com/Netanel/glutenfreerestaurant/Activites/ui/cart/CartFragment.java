@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Adapter.CartRycyclerViewAdapter;
 import com.Netanel.glutenfreerestaurant.Model.Order;
+import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentCartBinding;
@@ -33,9 +35,9 @@ public class CartFragment extends Fragment {
         View root = binding.getRoot();
         cartRV = binding.cartlist;
         mAdapter = new CartRycyclerViewAdapter(getContext());
-        mAdapter.updateCart(MainActivity.userDB.getCurrentOrder().getAllFoods());
+        mAdapter.updateCart(UserDB.getInstance().getCurrentOrder().getAllFoods());
         checkEmptyCart();
-        LinearLayoutManager linearLayoutManager =  new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         cartRV.setLayoutManager(linearLayoutManager);
         cartRV.setAdapter(mAdapter);
@@ -43,24 +45,24 @@ public class CartFragment extends Fragment {
          * When a customer press on delete item it will be removed from the cart
          */
         mAdapter.setFoodClickListener((food, position) -> {
-            MainActivity.userDB.getCurrentOrder().getAllFoods().remove(position);
-            mAdapter.updateCart(MainActivity.userDB.getCurrentOrder().getAllFoods());
+            UserDB.getInstance().getCurrentOrder().getAllFoods().remove(position);
+            mAdapter.updateCart(UserDB.getInstance().getCurrentOrder().getAllFoods());
             checkEmptyCart();
         });
-        binding.cartBTNCheckOut.setOnClickListener(view ->checkOut());
+        binding.cartBTNCheckOut.setOnClickListener(view -> checkOut());
 
         return root;
     }
 
     private void checkOut() {
         // TODO: 1/13/2023 to insure the lat + lon + orderNumber
-        MainActivity.userDB.getCurrentOrder().setTimeStamp(15);
-        MainActivity.userDB.addOrder(MainActivity.userDB.getCurrentOrder());
+        UserDB.getInstance().getCurrentOrder().setTimeStamp(15);
+        UserDB.getInstance().addOrder(UserDB.getInstance().getCurrentOrder());
         reference = reference.child(MainActivity.currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                reference.setValue(MainActivity.userDB);
+                reference.setValue(UserDB.getInstance());
             }
 
             @Override
@@ -74,18 +76,17 @@ public class CartFragment extends Fragment {
     }
 
     private void clearCheckOut() {
-        MainActivity.userDB.setCurrentOrder(new Order());
-        mAdapter.updateCart(MainActivity.userDB.getCurrentOrder().getAllFoods());
+        UserDB.getInstance().setCurrentOrder(new Order());
+        mAdapter.updateCart(UserDB.getInstance().getCurrentOrder().getAllFoods());
         checkEmptyCart();
     }
 
     private void checkEmptyCart() {
-        if( MainActivity.userDB.getCurrentOrder().getAllFoods().size() > 0){
+        if (UserDB.getInstance().getCurrentOrder().getAllFoods().size() > 0) {
             binding.cartBTNCheckOut.setVisibility(View.VISIBLE);
             binding.cartLBLTotalPrice.setVisibility(View.VISIBLE);
-            binding.cartLBLTotalPrice.setText("Total price:"+MainActivity.userDB.totalPrice() +"$");
-        }
-        else{
+            binding.cartLBLTotalPrice.setText("Total price:" + UserDB.getInstance().totalPrice() + "$");
+        } else {
             binding.cartBTNCheckOut.setVisibility(View.INVISIBLE);
             binding.cartLBLTotalPrice.setText("The Cart Empty");
 

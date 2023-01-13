@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
+import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.MyUtils.MySignal;
@@ -56,10 +57,7 @@ public class ItemFoodFragment extends Fragment {
         putDetailOnScreen();
 
         foodItem_BTN_cart.setOnClickListener(view1 -> {
-//            if(MainActivity.userDB.getCurrentOrder() == null){
-//                MainActivity.userDB.setCurrentOrder(new Order());
-//            }
-            MainActivity.userDB.getCurrentOrder().addFood(food);//adding the current food to the currentOrder
+            UserDB.getInstance().getCurrentOrder().addFood(food);//adding the current food to the currentOrder
             MySignal.getInstance().toast("Item Added");
 
         });

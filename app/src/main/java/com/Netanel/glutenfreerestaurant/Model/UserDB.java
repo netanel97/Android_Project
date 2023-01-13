@@ -1,5 +1,5 @@
 package com.Netanel.glutenfreerestaurant.Model;
-
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -7,25 +7,46 @@ public class UserDB {
     private ArrayList<Order> allOrders;
     private Order currentOrder;
     private String name;
+    private static UserDB userDB = null;
 
-
-
-    public UserDB() {
-        this.allOrders = new ArrayList<Order>();
-        this.currentOrder = new Order();
+    private UserDB(){
+        allOrders = new ArrayList<>();
+        currentOrder = new Order();
     }
 
-    public ArrayList<Order> getAllOrders() {
-        return allOrders;
+
+    private UserDB(FirebaseUser currentUser){
+        allOrders = new ArrayList<>();
+        currentOrder = new Order();
+        this.name = currentUser.getDisplayName();
+
     }
 
-    public void setAllOrders(ArrayList<Order> allOrders) {
-        this.allOrders = allOrders;
+    public static void init(FirebaseUser currentUser){
+        if (userDB == null) {
+            userDB = new UserDB(currentUser);
+        }
+    }
+    public static UserDB getInstance(){return userDB;}
+
+    public void setUser(UserDB user){
+        this.name = user.name;
+        this.currentOrder = user.currentOrder;
+        this.allOrders = user.allOrders;
     }
 
     public Order getCurrentOrder() {
         return currentOrder;
     }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
+    }
+
+
+
+
+
     public String totalPrice(){
         int totalPrice = 0;
         for (int i = 0; i < currentOrder.getAllFoods().size(); i++) {
@@ -33,9 +54,6 @@ public class UserDB {
 
         }
         return Integer.toString(totalPrice);
-    }
-    public void setCurrentOrder(Order currentOrder) {
-        this.currentOrder = currentOrder;
     }
 
 

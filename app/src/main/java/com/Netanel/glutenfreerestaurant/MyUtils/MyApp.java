@@ -2,6 +2,9 @@ package com.Netanel.glutenfreerestaurant.MyUtils;
 
 import android.app.Application;
 
+import com.Netanel.glutenfreerestaurant.Model.UserDB;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MyApp extends Application {
 
 
@@ -10,6 +13,7 @@ public class MyApp extends Application {
         super.onCreate();
         FireBaseOperations.getInstance();
         MySignal.init(this);
+
 
 
 

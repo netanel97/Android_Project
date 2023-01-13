@@ -1,12 +1,11 @@
 package com.Netanel.glutenfreerestaurant.Activites;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
@@ -15,10 +14,8 @@ import com.Netanel.glutenfreerestaurant.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,9 +27,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public static FirebaseUser currentUser = null;
-    public static UserDB userDB;
     private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference(Constants.USER_DB);
-    private boolean check = false;
+    private boolean isNewUser = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
             new FirebaseAuthUIActivityResultContract(),
             result -> onSignInResult(result)
     );
+
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
     }
 
     private void createNewUserDB() {
-        userDB = new UserDB();
-        userDB.setName(currentUser.getDisplayName());
-        reference.child(currentUser.getUid()).setValue(userDB);
+        UserDB.init(currentUser);
+        reference.child(currentUser.getUid()).setValue(UserDB.getInstance());
     }
 
     private void login(FirebaseUser currentUser) {
-        if(currentUser == null) {//not found in DB
+        if (currentUser == null) {//not found in DB
             // Choose authentication providers
 
             List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -69,19 +65,18 @@ public class MainActivity extends AppCompatActivity {
                     .setAvailableProviders(providers).setLogo(R.drawable.glutenfree).setIsSmartLockEnabled(false)
                     .build();
             signInLauncher.launch(signInIntent);
-            check = true;
-        }
-        else{
+            isNewUser = true;
+        } else {
+            UserDB.init(currentUser);
             // TODO: 1/11/2023 need to check how to enter to the value here without boolean..
-            if(check) {
+            if (isNewUser) {
                 createNewUserDB();
                 switchScreen();
-            }
-            else {
+            } else {
                 loadUserFromDB();
             }
         }
-        }
+    }
 
     /**
      * Getting the current user by uid
@@ -91,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userDB = snapshot.getValue(UserDB.class);
+                UserDB.getInstance().setUser(snapshot.getValue(UserDB.class));
                 switchScreen();
             }
 
@@ -103,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchScreen() {
-        if (userDB == null)
-            userDB = new UserDB();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();
