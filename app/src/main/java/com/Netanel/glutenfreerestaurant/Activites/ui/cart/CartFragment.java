@@ -1,8 +1,6 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.cart;
 
-import android.icu.util.Calendar;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,27 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
-import com.Netanel.glutenfreerestaurant.Adapter.CartRycyclerViewAdapter;
+import com.Netanel.glutenfreerestaurant.Adapter.CartRecyclerViewAdapter;
 import com.Netanel.glutenfreerestaurant.Model.Order;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
-import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentCartBinding;
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 
-import java.time.LocalDateTime;
-
-
 public class CartFragment extends Fragment {
 
     private FragmentCartBinding binding;
-    private CartRycyclerViewAdapter mAdapter;
+    private CartRecyclerViewAdapter mAdapter;
     private RecyclerView cartRV;
     private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference(Constants.USER_DB);
 
@@ -42,7 +35,7 @@ public class CartFragment extends Fragment {
         binding = FragmentCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         cartRV = binding.cartlist;
-        mAdapter = new CartRycyclerViewAdapter(getContext());
+        mAdapter = new CartRecyclerViewAdapter(getContext());
         mAdapter.updateCart(UserDB.getInstance().getCurrentOrder().getAllFoods());
         checkEmptyCart();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -96,7 +89,8 @@ public class CartFragment extends Fragment {
         if (UserDB.getInstance().getCurrentOrder().getAllFoods().size() > 0) {
             binding.cartBTNCheckOut.setVisibility(View.VISIBLE);
             binding.cartLBLTotalPrice.setVisibility(View.VISIBLE);
-            binding.cartLBLTotalPrice.setText("Total price:" + UserDB.getInstance().totalPrice() + "$");
+            // TODO: 1/14/2023 need to check that calc func
+            binding.cartLBLTotalPrice.setText("Total price:" + UserDB.getInstance().getCurrentOrder().totalPrice() + "$");
         } else {
             binding.cartBTNCheckOut.setVisibility(View.INVISIBLE);
             binding.cartLBLTotalPrice.setText("The Cart Empty");

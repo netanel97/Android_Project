@@ -1,6 +1,5 @@
 package com.Netanel.glutenfreerestaurant.Model;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ public class Order {
     private double lat = 33.4;
     private double lon = 32.4;
     private long timeStamp;
+    private boolean isActive;
 //    private Timestamp timeStamp;
     // TODO: 1/13/2023 add status boolean true-->active false -->inactive
 
@@ -20,9 +20,14 @@ public class Order {
         allFoods = new ArrayList<Food>();
     }
 
-//    public String getOrderNumber() {
-//        return orderNumber;
-//    }
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
     /**
     adding specific food to the list
      **/
@@ -39,6 +44,7 @@ public class Order {
     }
 
     public void setTimeStamp(long timeStamp) {
+        this.isActive = true; //active order
         this.timeStamp = timeStamp;
     }
     public long getTimeStamp() {
@@ -63,6 +69,15 @@ public class Order {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String totalPrice(){
+        int totalPrice = 0;
+        for (int i = 0; i < allFoods.size(); i++) {
+            totalPrice += Integer.parseInt(allFoods.get(i).getPrice());
+
+        }
+        return Integer.toString(totalPrice);
     }
 
     @Override

@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
-import com.Netanel.glutenfreerestaurant.Model.Order;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.R;
 import com.bumptech.glide.Glide;
@@ -19,11 +17,11 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-public class CartRycyclerViewAdapter extends RecyclerView.Adapter<CartRycyclerViewAdapter.CartViewHolder> {
+public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.CartViewHolder> {
     private Context context;
     private ArrayList<Food> foods;
     private FoodClickListener listener;
-    public CartRycyclerViewAdapter(Context context){
+    public CartRecyclerViewAdapter(Context context){
         this.context = context;
         foods = new ArrayList<>();
     }
@@ -36,7 +34,7 @@ public class CartRycyclerViewAdapter extends RecyclerView.Adapter<CartRycyclerVi
         return cartViewHolder;
     }
 
-    public CartRycyclerViewAdapter setFoodClickListener(CartRycyclerViewAdapter.FoodClickListener FoodClickListener){
+    public CartRecyclerViewAdapter setFoodClickListener(CartRecyclerViewAdapter.FoodClickListener FoodClickListener){
         this.listener = FoodClickListener;
         return this;
     }
@@ -47,7 +45,7 @@ public class CartRycyclerViewAdapter extends RecyclerView.Adapter<CartRycyclerVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartRycyclerViewAdapter.CartViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.CartViewHolder holder, int position) {
         Food item = getItem(position);
         holder.cart_LBL_FoodName.setText(item.getName());
         holder.cart_LBL_price.setText(item.getPrice()+"$");

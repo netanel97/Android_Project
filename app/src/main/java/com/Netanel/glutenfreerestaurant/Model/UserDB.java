@@ -47,14 +47,8 @@ public class UserDB {
         this.currentOrder = currentOrder;
     }
 
-    public String totalPrice(){
-        int totalPrice = 0;
-        for (int i = 0; i < currentOrder.getAllFoods().size(); i++) {
-            totalPrice += Integer.parseInt(currentOrder.getAllFoods().get(i).getPrice());
 
-        }
-        return Integer.toString(totalPrice);
-    }
+
 
 
     public void setName(String name) {

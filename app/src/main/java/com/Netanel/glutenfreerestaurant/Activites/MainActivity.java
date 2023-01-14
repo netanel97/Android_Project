@@ -75,14 +75,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             UserDB.init(currentUser);
             checkAlreadyExists();
-//            Log.d("loading", String.valueOf(isNewUser));
-//            if(isNewUser) {
-//                loadUserFromDB();
-//            }
-//            else {
-//                createNewUserDB();
-//                switchScreen();
-//            }
         }
     }
 
@@ -97,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+
                     isNewUser = true;
                     for (DataSnapshot snap:snapshot.getChildren()) {
                         if (currentUser.getUid().equals(snap.getKey())) {
@@ -112,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     switchScreen();
                 }
 
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
