@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    android:elevation="4dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+
+        <TextView
+
+            android:id="@+id/order_TXT_orderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order name"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/order_TXT_orderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_TXT_orderName"
+            android:text="Order status"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/order_TXT_totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_TXT_orderStatus"
+            android:text="Total price"
+            android:textSize="20sp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/order_BTN_trackOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#A9d440"
+            android:shadowColor="@color/black"
+            android:text="Truck Order"
+            android:textColor="@color/white"
+            app:cornerRadius="4dp" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>

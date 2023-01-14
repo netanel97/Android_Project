@@ -1,6 +1,10 @@
 package com.Netanel.glutenfreerestaurant.Model;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 public class Order {
 //    private String orderNumber;
@@ -8,6 +12,7 @@ public class Order {
     private double lat = 33.4;
     private double lon = 32.4;
     private long timeStamp;
+//    private Timestamp timeStamp;
     // TODO: 1/13/2023 add status boolean true-->active false -->inactive
 
 
@@ -68,5 +73,9 @@ public class Order {
                 ", lon=" + lon +
                 ", timeStamp=" + timeStamp +
                 '}';
+    }
+
+    public LocalDateTime getTimestampAsLDT(){
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(this.timeStamp), TimeZone.getDefault().toZoneId());
     }
 }

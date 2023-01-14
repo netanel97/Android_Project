@@ -35,6 +35,10 @@ public class UserDB {
         this.allOrders = user.allOrders;
     }
 
+    public ArrayList<Order> getAllOrders() {
+        return allOrders;
+    }
+
     public Order getCurrentOrder() {
         return currentOrder;
     }
@@ -42,10 +46,6 @@ public class UserDB {
     public void setCurrentOrder(Order currentOrder) {
         this.currentOrder = currentOrder;
     }
-
-
-
-
 
     public String totalPrice(){
         int totalPrice = 0;
@@ -67,6 +67,11 @@ public class UserDB {
 
     public void addOrder(Order order){
         allOrders.add(order);
+    }
+
+
+    public void setAllOrders(ArrayList<Order> allOrders) {
+        this.allOrders = allOrders;
     }
 
     @Override

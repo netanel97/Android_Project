@@ -33,12 +33,7 @@ public class FireBaseOperations
          return databaseReference;
     }
 
-    public FirebaseDatabase getDatabase() {
-        return database;
-    }
 
-    public DatabaseReference getDatabaseReference() {
-        return databaseReference;
-    }
+
 
 }
