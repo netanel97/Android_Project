@@ -93,7 +93,7 @@ public class CartFragment extends Fragment {
             binding.cartLBLTotalPrice.setText("Total price:" + UserDB.getInstance().getCurrentOrder().totalPrice() + "$");
         } else {
             binding.cartBTNCheckOut.setVisibility(View.INVISIBLE);
-            binding.cartLBLTotalPrice.setText("The Cart Empty");
+            binding.cartLBLTotalPrice.setText(Constants.EMPTY_CART);
 
 
         }

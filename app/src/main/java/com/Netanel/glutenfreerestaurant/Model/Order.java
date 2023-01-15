@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.TimeZone;
 
 public class Order {
-//    private String orderNumber;
     private ArrayList<Food> allFoods;
-    private double lat = 33.4;
-    private double lon = 32.4;
+    private double lat = 32.113558;
+    private double lon = 34.817590;
     private long timeStamp;
     private boolean isActive;
-//    private Timestamp timeStamp;
-    // TODO: 1/13/2023 add status boolean true-->active false -->inactive
 
 
     public Order() {
@@ -35,9 +32,7 @@ public class Order {
         allFoods.add(food);
     }
 
-//    public void setOrderNumber(String orderNumber) {
-//        this.orderNumber = orderNumber;
-//    }
+
 
     public ArrayList<Food> getAllFoods() {
         return allFoods;
@@ -78,16 +73,6 @@ public class Order {
 
         }
         return Integer.toString(totalPrice);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                ", allFoods=" + allFoods +
-                ", lat=" + lat +
-                ", lon=" + lon +
-                ", timeStamp=" + timeStamp +
-                '}';
     }
 
     public LocalDateTime getTimestampAsLDT(){

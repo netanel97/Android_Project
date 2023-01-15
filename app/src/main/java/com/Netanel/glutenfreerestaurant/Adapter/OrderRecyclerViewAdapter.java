@@ -20,13 +20,16 @@ import java.util.ArrayList;
 
 public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecyclerViewAdapter.OrderViewHolder> {
     private Context context;
-    private orderClickListener listener;
+    private OrderClickListener listener;
     private ArrayList<Order> allOrders;
+    private final String isActive = "Active!";
+    private final String isDelivered = "Delivered!";
 
-    public OrderRecyclerViewAdapter(Context context){
+    public OrderRecyclerViewAdapter(Context context) {
         this.context = context;
         allOrders = new ArrayList<>();
     }
+
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,11 +37,13 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
         OrderViewHolder orderViewHolder = new OrderViewHolder(view);
         return orderViewHolder;
     }
-    public OrderRecyclerViewAdapter setOrderClickListener(OrderRecyclerViewAdapter.orderClickListener orderClickListener){
+
+    public OrderRecyclerViewAdapter setOrderClickListener(OrderClickListener orderClickListener) {
         this.listener = orderClickListener;
         return this;
     }
-    public void updateOrderTrucking(final ArrayList<Order> allOrders){
+
+    public void updateOrderTrucking(final ArrayList<Order> allOrders) {
         this.allOrders = allOrders;
         notifyDataSetChanged();
     }
@@ -48,8 +53,8 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
         Order item = getItem(position);
         holder.order_TXT_orderName.setText(UserDB.getInstance().getName());
         holder.order_TXT_totalPrice.setText(item.totalPrice());
-        holder.order_TXT_orderStatus.setText(item.isActive()?"Active!":"Delivered!");
-        holder.order_TXT_orderStatus.setTextColor(ContextCompat.getColor(context,item.isActive()?R.color.OrderActive:R.color.OrderInactive));
+        holder.order_TXT_orderStatus.setText(item.isActive() ? isActive : isDelivered);
+        holder.order_TXT_orderStatus.setTextColor(ContextCompat.getColor(context, item.isActive() ? R.color.OrderActive : R.color.OrderInactive));
     }
 
     private Order getItem(int position) {
@@ -57,16 +62,18 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
 
     }
 
+    public interface OrderClickListener {
+        void changeScreen(int position);
+
+    }
 
     @Override
     public int getItemCount() {
-        return UserDB.getInstance().getAllOrders() == null ? 0 :UserDB.getInstance().getAllOrders().size();
-    }
-    public interface orderClickListener{
-
+        return UserDB.getInstance().getAllOrders() == null ? 0 : UserDB.getInstance().getAllOrders().size();
     }
 
-    class OrderViewHolder extends RecyclerView.ViewHolder{
+
+    class OrderViewHolder extends RecyclerView.ViewHolder {
         private TextView order_TXT_orderName;
         private TextView order_TXT_orderStatus;
         private TextView order_TXT_totalPrice;
@@ -74,7 +81,17 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             findViews(itemView);
+            order_BTN_trackOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                     if (order_TXT_orderStatus.getText().equals(isActive)) {
+                         int position = getAdapterPosition();
+                         listener.changeScreen(position);
+                    }
+                }
+            });
         }
+
 
         private void findViews(View itemView) {
             order_TXT_orderName = itemView.findViewById(R.id.order_TXT_orderName);

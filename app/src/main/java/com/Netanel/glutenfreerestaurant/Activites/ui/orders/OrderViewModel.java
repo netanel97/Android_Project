@@ -70,7 +70,7 @@ public class OrderViewModel extends ViewModel {
         LocalDateTime time;
         for (int i = 0; i < allOrders.size(); i++) {
             time = LocalDateTime.ofInstant(Instant.ofEpochMilli(UserDB.getInstance().getAllOrders().get(i).getTimeStamp()), TimeZone.getDefault().toZoneId());
-            UserDB.getInstance().getAllOrders().get(i).setActive(LocalDateTime.now().isBefore(time.plusMinutes(2)));
+            UserDB.getInstance().getAllOrders().get(i).setActive(LocalDateTime.now().isBefore(time.plusMinutes(50)));
         }
         mOrders.setValue(allOrders);
 

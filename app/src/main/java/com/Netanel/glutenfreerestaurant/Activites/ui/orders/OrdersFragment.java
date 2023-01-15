@@ -1,24 +1,29 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.orders;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.Netanel.glutenfreerestaurant.Adapter.OrderRecyclerViewAdapter;
-import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.Model.Order;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
+import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
+import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentOrdersBinding;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 public class OrdersFragment extends Fragment {
 
@@ -31,6 +36,7 @@ public class OrdersFragment extends Fragment {
         binding = FragmentOrdersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         RecyclerView orderRV = binding.orderList;
+        requestLocationPermission();
         OrderViewModel orderViewModel = new OrderViewModel(UserDB.getInstance().getAllOrders());
         orderViewModel.getOrders().observe(getViewLifecycleOwner(),observer);
         mAdapter = new OrderRecyclerViewAdapter(getContext());
@@ -39,8 +45,24 @@ public class OrdersFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderRV.setLayoutManager(linearLayoutManager);
         orderRV.setAdapter(mAdapter);
+        mAdapter.setOrderClickListener(new OrderRecyclerViewAdapter.OrderClickListener() {
+            @Override
+            public void changeScreen(int position) {
+                final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
+                navController.navigate(R.id.nav_truckOrder);
+
+            }
+        });
         return root;
 
+    }
+
+    private void requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) getContext(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+
+        }
     }
 
     /**
@@ -54,6 +76,7 @@ public class OrdersFragment extends Fragment {
         public void onChanged(ArrayList<Order> orders) {
             mAdapter.updateOrderTrucking(orders);
         }};
+
 
         @Override
     public void onDestroyView() {

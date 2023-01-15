@@ -23,6 +23,9 @@ public class HomeViewModel extends ViewModel {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference(category);
 
+    /**
+     * Load the Categories from FB and put it on the ArrayList
+     */
     public HomeViewModel() {
         mCategories = new MutableLiveData<>();
         ArrayList<Category> categories = new ArrayList<>();

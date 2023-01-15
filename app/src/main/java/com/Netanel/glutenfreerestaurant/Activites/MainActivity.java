@@ -57,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
         reference.child(currentUser.getUid()).setValue(UserDB.getInstance());
     }
 
+    /**
+     *
+     * Google API, checking if the currentUser is null if yes, he will need to login/Register.
+     * If the user will register the data will be written in FB, if the user already exists,
+     * the it will load from FB
+     */
     private void login(FirebaseUser currentUser) {
         if (currentUser == null) {//not found in DB
             // Choose authentication providers
