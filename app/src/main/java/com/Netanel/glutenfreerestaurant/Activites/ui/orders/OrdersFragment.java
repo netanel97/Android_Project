@@ -32,7 +32,6 @@ public class OrdersFragment extends Fragment {
         View root = binding.getRoot();
         RecyclerView orderRV = binding.orderList;
         OrderViewModel orderViewModel = new OrderViewModel(UserDB.getInstance().getAllOrders());
-
         orderViewModel.getOrders().observe(getViewLifecycleOwner(),observer);
         mAdapter = new OrderRecyclerViewAdapter(getContext());
         mAdapter.updateOrderTrucking(UserDB.getInstance().getAllOrders());
@@ -44,6 +43,10 @@ public class OrdersFragment extends Fragment {
 
     }
 
+    /**
+     * The observer will listen all the time to changes in OrderViewModel and when will be a change,
+     * it will update the Adapter.
+     */
     Observer<ArrayList<Order>> observer = new Observer<ArrayList<Order>>(){
 
 
