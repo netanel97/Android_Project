@@ -2,7 +2,7 @@ package com.Netanel.glutenfreerestaurant.Activites.ui.map;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.MapFragmentBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;

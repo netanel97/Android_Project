@@ -104,6 +104,13 @@ public class Order implements Parcelable {
         return LocalDateTime.ofInstant(Instant.ofEpochMilli(this.timeStamp), TimeZone.getDefault().toZoneId());
     }
 
+    public String getOrderTime(){
+        LocalDateTime time = getTimestampAsLDT();
+        StringBuffer sb = new StringBuffer();
+        sb.append("Date of Order: ").append(time.getDayOfMonth()).append(".").append(time.getDayOfMonth()).append(".").append(time.getYear());
+        return sb.toString();
+    }
+
     @Override
     public int describeContents() {
         return 0;

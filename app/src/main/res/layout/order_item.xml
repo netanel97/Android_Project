@@ -19,14 +19,25 @@
             android:id="@+id/order_TXT_orderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="20"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+        <TextView
+            android:id="@+id/order_TXT_Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_TXT_orderName"
+            android:text="Order status: "
+            android:textStyle="italic"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/order_TXT_orderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_TXT_orderName"
-            android:text="Order status"
+            android:layout_toEndOf="@+id/order_TXT_Status"
             android:textSize="20sp"/>
 
         <TextView
@@ -37,7 +48,17 @@
             android:text="Total price"
             android:maxLines="1"
             android:maxLength="18"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
+        <TextView
+            android:id="@+id/order_TXT_orderTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order_TXT_totalPrice"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            />
         <com.google.android.material.button.MaterialButton
             android:id="@+id/order_BTN_trackOrder"
             android:layout_width="match_parent"
@@ -49,7 +70,7 @@
             android:layout_marginBottom="8dp"
             android:backgroundTint="#A9d440"
             android:shadowColor="@color/black"
-            android:text="Truck Order"
+            android:text="Track Order"
             android:textColor="@color/white"
             app:cornerRadius="4dp" />
 
