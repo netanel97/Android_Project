@@ -45,21 +45,21 @@ public class OrdersFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderRV.setLayoutManager(linearLayoutManager);
         orderRV.setAdapter(mAdapter);
-        mAdapter.setOrderClickListener(new OrderRecyclerViewAdapter.OrderClickListener() {
-            @Override
-            public void changeScreen(int position) {
-                Bundle args = new Bundle();
-                args.putParcelableArrayList(Constants.ALL_LOCATIONS,UserDB.getInstance().getAllOrders().get(position).getAllLocations());
-                args.putInt(Constants.ORDER_NUMBER,position);
-                final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
-                navController.navigate(R.id.nav_truckOrder,args);
+        mAdapter.setOrderClickListener(position -> {
+            Bundle args = new Bundle();
+            args.putParcelableArrayList(Constants.ALL_LOCATIONS,UserDB.getInstance().getAllOrders().get(position).getAllLocations());
+            args.putInt(Constants.ORDER_NUMBER,position);
+            final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
+            navController.navigate(R.id.nav_truckOrder,args);
 
-            }
         });
         return root;
 
     }
 
+    /**
+     * request permission for the google maps
+     */
     private void requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

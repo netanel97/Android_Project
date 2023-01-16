@@ -42,17 +42,25 @@ public class MapFragment extends Fragment {
         View root = binding.getRoot();
         SupportMapFragment supportMapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.maps));
         locationArrayList = getArguments().getParcelableArrayList(Constants.ALL_LOCATIONS);
-        int currentOrder = getArguments().getInt(Constants.ORDER_NUMBER);
         handler = new Handler();
         final Runnable r = new Runnable() {
             public void run() {
-                currentPosition = (int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60;
+                currentPosition =  calcTimeOrder();
                 supportMapFragment.getMapAsync(googleMap -> setMapLocation(googleMap));
                 handler.postDelayed(this, Delay);
             }
         };handler.postDelayed(r, 0);
 
         return root;
+    }
+
+    /**
+     * calculate the time from now minus the time that i order, and the result gives me the
+     * current position that should be on the map
+     */
+    private int calcTimeOrder() {
+        int currentOrder = getArguments().getInt(Constants.ORDER_NUMBER);
+        return (int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60;
     }
 
     public void setMapLocation(GoogleMap googleMap) {
@@ -68,9 +76,16 @@ public class MapFragment extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        handler.removeCallbacksAndMessages(null);
+
+
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
-
-        handler.removeCallbacks(r);
+        handler.removeCallbacksAndMessages(null);
     }
 }

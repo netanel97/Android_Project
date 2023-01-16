@@ -19,6 +19,7 @@ public class Order implements Parcelable {
     public Order() {
         this.allFoods = new ArrayList<Food>();
         setLocations();
+
     }
 
 

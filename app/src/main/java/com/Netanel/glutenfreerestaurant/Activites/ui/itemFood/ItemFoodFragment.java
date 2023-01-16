@@ -33,7 +33,7 @@ public class ItemFoodFragment extends Fragment {
     private MaterialTextView food_TXT_price;
     private Food food;
     private DatabaseReference reference = FireBaseOperations.getInstance().getDatabaseReference("UserDB");
-    //currentUser
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

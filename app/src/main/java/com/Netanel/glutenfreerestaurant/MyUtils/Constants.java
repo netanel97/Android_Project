@@ -1,6 +1,5 @@
 package com.Netanel.glutenfreerestaurant.MyUtils;
 
-import com.Netanel.glutenfreerestaurant.Model.UserDB;
 
 public class Constants {
     public static final String ARGS_CATEGORYID = "CategoryId";
