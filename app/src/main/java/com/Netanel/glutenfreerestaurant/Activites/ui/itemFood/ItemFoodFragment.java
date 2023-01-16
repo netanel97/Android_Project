@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;

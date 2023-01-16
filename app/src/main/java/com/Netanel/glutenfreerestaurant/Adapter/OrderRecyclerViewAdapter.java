@@ -51,8 +51,8 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order item = getItem(position);
-        holder.order_TXT_orderName.setText(UserDB.getInstance().getName());
-        holder.order_TXT_totalPrice.setText(item.totalPrice());
+        holder.order_TXT_orderName.setText("Ordered by "+UserDB.getInstance().getName());
+        holder.order_TXT_totalPrice.setText("Total Price: "+item.totalPrice() + "$");
         holder.order_TXT_orderStatus.setText(item.isActive() ? isActive : isDelivered);
         holder.order_TXT_orderStatus.setTextColor(ContextCompat.getColor(context, item.isActive() ? R.color.OrderActive : R.color.OrderInactive));
     }

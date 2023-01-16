@@ -48,8 +48,10 @@ public class OrdersFragment extends Fragment {
         mAdapter.setOrderClickListener(new OrderRecyclerViewAdapter.OrderClickListener() {
             @Override
             public void changeScreen(int position) {
+                Bundle args = new Bundle();
+                args.putParcelableArrayList(Constants.ALL_LOCATIONS,UserDB.getInstance().getAllOrders().get(position).getAllLocations());
                 final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
-                navController.navigate(R.id.nav_truckOrder);
+                navController.navigate(R.id.nav_truckOrder,args);
 
             }
         });

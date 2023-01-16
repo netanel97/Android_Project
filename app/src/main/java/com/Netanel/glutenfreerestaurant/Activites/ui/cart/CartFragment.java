@@ -57,6 +57,9 @@ public class CartFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Adding the current order to the Arraylist<Order>
+     */
     private void checkOut() {
         // TODO: 1/13/2023 to insure the lat + lon + orderNumber
 

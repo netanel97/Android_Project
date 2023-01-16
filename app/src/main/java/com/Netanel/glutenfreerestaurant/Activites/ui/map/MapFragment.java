@@ -1,6 +1,7 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.map;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,9 @@ public class MapFragment extends Fragment {
 
     private MapFragmentBinding binding;
     private ArrayList<LatLng> locationArrayList = new ArrayList<>();
+    private Handler handler;
+    private int counter = -1;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,30 +37,39 @@ public class MapFragment extends Fragment {
         binding = MapFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         SupportMapFragment supportMapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.maps));
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
-                setMapLocation(googleMap);
+        locationArrayList = getArguments().getParcelableArrayList(Constants.ALL_LOCATIONS);
+//        LatLng restaurant = new LatLng(Constants.restaurantLat, Constants.restaurantLong);
+//        LatLng customer = new LatLng(Constants.User_Lat, Constants.User_lon);
+//        locationArrayList.add(restaurant);
+//        locationArrayList.add(customer);
+
+        handler = new Handler();
+        final Runnable r = new Runnable() {
+            public void run() {
+                counter+=1;
+                // end - start (/1000 / 60
+                supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(@NonNull GoogleMap googleMap) {
+                        setMapLocation(googleMap);
+                    }
+                });
+                handler.postDelayed(this, 10000);
             }
-        });
+        };handler.postDelayed(r, 1000);
+
         return root;
     }
 
     public void setMapLocation(GoogleMap googleMap) {
-        LatLng restaurant = new LatLng(Constants.restaurantLat, Constants.restaurantLong);
-        LatLng customer = new LatLng(Constants.User_Lat, Constants.User_lon);
-        locationArrayList.add(restaurant);
-        locationArrayList.add(customer);
-
-        for (int i = 0; i < locationArrayList.size(); i++) {
-            googleMap.clear();
-            googleMap.addMarker(new MarkerOptions()
-                    .position(locationArrayList.get(i)).title("hello"));
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(locationArrayList.get(i))      // Sets the center of the map to location user
-                    .zoom(15)                   // Sets the zoom
-                    .build();                   // Creates a CameraPosition from the builder
-            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        googleMap.clear();
+        googleMap.addMarker(new MarkerOptions()
+                .position(locationArrayList.get(counter)).title("hello"));
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(locationArrayList.get(counter))      // Sets the center of the map to location user
+                .zoom(15)                   // Sets the zoom
+                .build();                   // Creates a CameraPosition from the builder
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
 
@@ -73,7 +86,7 @@ public class MapFragment extends Fragment {
 //            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 //            //   CameraPosition cameraPosition =new CameraPosition.Builder().zoom(15).build();
 
-        }
+        //}
     }
 
 

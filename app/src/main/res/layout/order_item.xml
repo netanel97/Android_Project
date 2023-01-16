@@ -19,7 +19,7 @@
             android:id="@+id/order_TXT_orderName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order name"
+            android:maxLength="20"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/order_TXT_orderStatus"
@@ -35,6 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/order_TXT_orderStatus"
             android:text="Total price"
+            android:maxLines="1"
+            android:maxLength="18"
             android:textSize="20sp"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/order_BTN_trackOrder"

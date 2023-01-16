@@ -3,7 +3,6 @@ package com.Netanel.glutenfreerestaurant.Activites;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.Netanel.glutenfreerestaurant.Model.Order;
@@ -13,9 +12,7 @@ import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.ActivityHomeBinding;
 import com.bumptech.glide.Glide;
-import com.firebase.ui.auth.data.model.User;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.navigation.NavController;
