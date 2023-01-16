@@ -14,12 +14,10 @@ public class Order implements Parcelable {
     private ArrayList<Food> allFoods;
     private long timeStamp;
     private boolean isActive;
-    private ArrayList<LatLng> allLocations;
 
 
     public Order() {
         this.allFoods = new ArrayList<Food>();
-        this.allLocations = new ArrayList<>();
         setLocations();
     }
 
@@ -28,7 +26,6 @@ public class Order implements Parcelable {
         allFoods = in.createTypedArrayList(Food.CREATOR);
         timeStamp = in.readLong();
         isActive = in.readByte() != 0;
-        allLocations = in.createTypedArrayList(LatLng.CREATOR);
     }
 
     public static final Creator<Order> CREATOR = new Creator<Order>() {
@@ -68,21 +65,24 @@ public class Order implements Parcelable {
         this.isActive = true; //active order
         this.timeStamp = timeStamp;
     }
-    private void setLocations() {
-        this.allLocations.add(new LatLng(32.146259, 34.837870));
-        this.allLocations.add(new LatLng(32.145907, 34.838393));
-        this.allLocations.add(new LatLng(32.143211, 34.837374));
-        this.allLocations.add(new LatLng(32.141316, 34.836580));
-        this.allLocations.add(new LatLng(32.136840, 34.834396));
-        this.allLocations.add(new LatLng(32.129764, 34.829910));
-        this.allLocations.add(new LatLng(32.122819, 34.824346));
-        this.allLocations.add(new LatLng(32.118647, 34.818495));
-        this.allLocations.add(new LatLng(32.114032, 34.816993));
+    private ArrayList<LatLng> setLocations() {
+        ArrayList<LatLng> allLocations = new ArrayList<>();
+        allLocations.add(new LatLng(32.146259, 34.837870));
+        allLocations.add(new LatLng(32.145907, 34.838393));
+        allLocations.add(new LatLng(32.143211, 34.837374));
+        allLocations.add(new LatLng(32.141316, 34.836580));
+        allLocations.add(new LatLng(32.136840, 34.834396));
+        allLocations.add(new LatLng(32.129764, 34.829910));
+        allLocations.add(new LatLng(32.122819, 34.824346));
+        allLocations.add(new LatLng(32.118647, 34.818495));
+        allLocations.add(new LatLng(32.114032, 34.816993));
+        return allLocations;
+
     }
 
 
     public ArrayList<LatLng> getAllLocations() {
-        return allLocations;
+        return setLocations();
     }
 
     public long getTimeStamp() {
@@ -113,6 +113,5 @@ public class Order implements Parcelable {
         parcel.writeTypedList(allFoods);
         parcel.writeLong(timeStamp);
         parcel.writeByte((byte) (isActive ? 1 : 0));
-        parcel.writeTypedList(allLocations);
     }
 }
