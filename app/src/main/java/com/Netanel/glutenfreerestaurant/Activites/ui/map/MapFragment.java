@@ -3,6 +3,7 @@ package com.Netanel.glutenfreerestaurant.Activites.ui.map;
 import android.os.Bundle;
 import android.os.Handler;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,12 @@ public class MapFragment extends Fragment {
         final Runnable r = new Runnable() {
             public void run() {
                 currentPosition =  calcTimeOrder();
-                supportMapFragment.getMapAsync(googleMap -> setMapLocation(googleMap));
+                if(locationArrayList.size() > currentPosition){
+                    supportMapFragment.getMapAsync(googleMap -> setMapLocation(googleMap));
+                }
+                else{
+                    handler.removeCallbacksAndMessages(null);
+                }
                 handler.postDelayed(this, Delay);
             }
         };handler.postDelayed(r, 0);
@@ -59,6 +65,7 @@ public class MapFragment extends Fragment {
      */
     private int calcTimeOrder() {
         int currentOrder = getArguments().getInt(Constants.ORDER_NUMBER);
+        Log.d("bdika",""+(int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60);
         return (int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60;
     }
 
@@ -86,5 +93,11 @@ public class MapFragment extends Fragment {
     public void onStop() {
         super.onStop();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }

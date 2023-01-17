@@ -107,7 +107,7 @@ public class Order implements Parcelable {
     public String getOrderTime(){
         LocalDateTime time = getTimestampAsLDT();
         StringBuffer sb = new StringBuffer();
-        sb.append("Date of Order: ").append(time.getDayOfMonth()).append(".").append(time.getDayOfMonth()).append(".").append(time.getYear());
+        sb.append("Date of Order: ").append(time.getDayOfMonth()).append(".").append(time.getMonthValue()).append(".").append(time.getYear());
         return sb.toString();
     }
 

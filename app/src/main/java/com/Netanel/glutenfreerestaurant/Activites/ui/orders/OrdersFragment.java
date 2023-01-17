@@ -30,6 +30,8 @@ public class OrdersFragment extends Fragment {
     private FragmentOrdersBinding binding;
     private OrderRecyclerViewAdapter mAdapter;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -45,13 +47,18 @@ public class OrdersFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         orderRV.setLayoutManager(linearLayoutManager);
         orderRV.setAdapter(mAdapter);
-        mAdapter.setOrderClickListener(position -> {
-            Bundle args = new Bundle();
-            args.putParcelableArrayList(Constants.ALL_LOCATIONS,UserDB.getInstance().getAllOrders().get(position).getAllLocations());
-            args.putInt(Constants.ORDER_NUMBER,position);
-            final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
-            navController.navigate(R.id.nav_truckOrder,args);
 
+
+        mAdapter.setOrderClickListener(position -> {
+            orderViewModel.changeStatusSingleOrder(position);
+            if(UserDB.getInstance().getAllOrders().get(position).isActive()){
+                Bundle args = new Bundle();
+                args.putParcelableArrayList(Constants.ALL_LOCATIONS,UserDB.getInstance().getAllOrders().get(position).getAllLocations());
+                args.putInt(Constants.ORDER_NUMBER,position);
+                final NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_home);
+                navController.navigate(R.id.nav_truckOrder,args);
+            }
+            mAdapter.notifyDataSetChanged();
         });
         return root;
 

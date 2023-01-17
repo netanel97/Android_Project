@@ -55,6 +55,8 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
         holder.order_TXT_orderName.setText("Ordered by: "+UserDB.getInstance().getName());
         holder.order_TXT_totalPrice.setText("Total Price: "+item.totalPrice() + "$");
         holder.order_TXT_orderStatus.setText(item.isActive() ? isActive : isDelivered);
+        holder.order_BTN_trackOrder.setClickable(item.isActive());
+        holder.order_BTN_trackOrder.setText(item.isActive()?"Track Order":"order delivered!");
         holder.order_TXT_orderTime.setText(item.getOrderTime());
         holder.order_TXT_orderStatus.setTextColor(ContextCompat.getColor(context, item.isActive() ? R.color.OrderActive : R.color.OrderInactive));
     }
@@ -88,6 +90,8 @@ public class OrderRecyclerViewAdapter extends RecyclerView.Adapter<OrderRecycler
                 @Override
                 public void onClick(View view) {
                      if (order_TXT_orderStatus.getText().equals(isActive)) {
+                         // check if order is still active. (active = has at least 1 minute of delivery left)
+                         // (callback) when done if still active go to new screen
                          int position = getAdapterPosition();
                          listener.changeScreen(position);
                     }

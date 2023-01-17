@@ -29,52 +29,58 @@ public class OrderViewModel extends ViewModel {
     public OrderViewModel() {
         mOrders = new MutableLiveData<>();
     }
+
     public OrderViewModel(ArrayList<Order> allOrders){
         this();
         mOrders = new MutableLiveData<>();
         changeStatusOrder(allOrders);
-        updateStatusOrderDB();
-
-
     }
 
     /**
      * This Function will check if the the order from allOrders is InActive,if yes it will update the FB
      */
 
-    private void updateStatusOrderDB() {
-        reference = reference.child(MainActivity.currentUser.getUid()).child(Constants.ALL_ORDERS);;
-        for (int i = 0; i < UserDB.getInstance().getAllOrders().size() ; i++) {
-            if(!UserDB.getInstance().getAllOrders().get(i).isActive()){
-                String currentChild = String.valueOf(i);
-                int currentOrder = i;
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        snapshot.getRef().child(currentChild).child(Constants.ACTIVE).setValue(UserDB.getInstance().getAllOrders().get(currentOrder).isActive());
-                    }
+    private void updateStatusSingleOrderDB(int i) {
+        reference = FireBaseOperations.getInstance().getDatabaseReference(Constants.USER_DB).child(MainActivity.currentUser.getUid()).child(Constants.ALL_ORDERS);
+        if(!UserDB.getInstance().getAllOrders().get(i).isActive()){
+            String currentChild = String.valueOf(i);
+            int currentOrder = i;
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    snapshot.getRef().child(currentChild).child(Constants.ACTIVE).setValue(UserDB.getInstance().getAllOrders().get(currentOrder).isActive());
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-            }
+                }
+            });
         }
-    }
 
+    }
     /**
      * check for each order,the current time that was checked, and put Active/InActive value
      */
     private void changeStatusOrder(ArrayList<Order> allOrders) {
-        LocalDateTime time;
+
         for (int i = 0; i < allOrders.size(); i++) {
-            time = LocalDateTime.ofInstant(Instant.ofEpochMilli(UserDB.getInstance().getAllOrders().get(i).getTimeStamp()), TimeZone.getDefault().toZoneId());
-            UserDB.getInstance().getAllOrders().get(i).setActive(LocalDateTime.now().isBefore(time.plusMinutes(Constants.DELIVERY_TIME)));
+          changeStatusSingleOrder(i);
         }
         mOrders.setValue(allOrders);
 
     }
+
+    public void changeStatusSingleOrder(int i) {
+        LocalDateTime time;
+        time = LocalDateTime.ofInstant(Instant.ofEpochMilli(UserDB.getInstance().getAllOrders().get(i).getTimeStamp()), TimeZone.getDefault().toZoneId());
+        if(UserDB.getInstance().getAllOrders().get(i).isActive()) {
+            UserDB.getInstance().getAllOrders().get(i).setActive(LocalDateTime.now().isBefore(time.plusMinutes(Constants.DELIVERY_TIME)));
+            updateStatusSingleOrderDB(i);
+        }
+
+    }
+
     public LiveData<ArrayList<Order>> getOrders(){
         return mOrders;
     }
