@@ -1,50 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3A3A3A"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/food_bar_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/overlayBackground"
+        android:layout_height="0dp"
+        android:layout_weight="1.2"
+        android:orientation="vertical">
 
-        >
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/food_collapsing"
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/food_IMG_foodItem"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="#0e0d0e">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/food_IMG_foodItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/food_bar_layout"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="5dp">
+            android:background="@color/white">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/food_TXT_name"
@@ -54,14 +42,16 @@
                 android:layout_marginTop="10dp"
                 android:maxLines="2"
                 android:text="Name"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="25sp" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/food_TXT_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="30dp"
                 android:textSize="25sp"
@@ -75,9 +65,9 @@
                 android:layout_below="@+id/food_TXT_description"
                 android:layout_marginStart="5dp"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="25sp" />
-
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/foodItem_BTN_cart"
@@ -91,7 +81,96 @@
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_add_to_cart"/>
         </RelativeLayout>
-                </LinearLayout>
 
 
-            </RelativeLayout>
+
+    </LinearLayout>
+
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:id="@+id/food_bar_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/overlayBackground"-->
+
+<!--        >-->
+<!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
+<!--            android:id="@+id/food_collapsing"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="350dp"-->
+<!--            android:fitsSystemWindows="true"-->
+<!--            app:layout_scrollFlags="scroll|exitUntilCollapsed"-->
+<!--            app:contentScrim="#0e0d0e">-->
+
+<!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:id="@+id/food_IMG_foodItem"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:contentDescription="@null"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                app:layout_collapseMode="parallax"/>-->
+
+<!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+
+
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/food_bar_layout"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginEnd="5dp">-->
+
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/food_TXT_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:maxLines="2"-->
+<!--                android:text="Name"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="25sp" />-->
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/food_TXT_description"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:autoSizeTextType="uniform"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:textSize="25sp"-->
+<!--                android:maxLines="2"-->
+<!--                android:layout_below="@+id/food_TXT_name"/>-->
+
+<!--            <com.google.android.material.textview.MaterialTextView-->
+<!--                android:id="@+id/food_TXT_price"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/food_TXT_description"-->
+<!--                android:layout_marginStart="5dp"-->
+<!--                android:maxLines="1"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="25sp" />-->
+
+
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/foodItem_BTN_cart"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="bottom|end"-->
+<!--                android:layout_marginEnd="@dimen/fab_margin"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:src="@drawable/ic_add_to_cart"/>-->
+<!--        </RelativeLayout>-->
+<!--                </LinearLayout>-->
+
+
+            </LinearLayout>
