@@ -62,27 +62,8 @@
             android:shadowColor="@color/black"
             android:text="Place Order"
             android:textColor="@color/white"
-            app:cornerRadius="4dp" />
+            app:cornerRadius="4dp"/>
 
-<!--            <com.chinalwb.slidetoconfirmlib.SlideToConfirm-->
-<!--                android:id="@+id/slide_to_confirm"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:gravity="center_horizontal"-->
-<!--                app:border_radius="30dp"-->
-<!--                app:border_width="2dp"-->
-<!--                app:completed_text="One more step..."-->
-<!--                app:completed_text_color="@android:color/white"-->
-<!--                app:completed_text_size="30sp"-->
-<!--                app:engage_text="Place Order              "-->
-<!--                app:engage_text_color="@android:color/black"-->
-<!--                app:engage_text_size="17sp"-->
-<!--                app:slider_color="@color/purple_700"-->
-<!--                app:slider_reset_duration="1000"-->
-<!--                app:slider_threshold="1dp"-->
-<!--                app:slider_vibration_duration="50"-->
-<!--                app:slider_width="100dp" />-->
         </RelativeLayout>
 
 

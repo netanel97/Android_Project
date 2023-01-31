@@ -21,7 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
-import com.google.firebase.database.DatabaseReference;
 
 
 public class ItemFoodFragment extends Fragment {

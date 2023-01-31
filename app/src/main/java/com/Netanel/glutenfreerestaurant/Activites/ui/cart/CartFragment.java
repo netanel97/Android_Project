@@ -2,30 +2,22 @@ package com.Netanel.glutenfreerestaurant.Activites.ui.cart;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.Netanel.glutenfreerestaurant.Activites.HomeActivity;
 import com.Netanel.glutenfreerestaurant.Activites.MainActivity;
 import com.Netanel.glutenfreerestaurant.Activites.PaymentSplash;
-import com.Netanel.glutenfreerestaurant.Activites.SplashActivity;
 import com.Netanel.glutenfreerestaurant.Adapter.CartRecyclerViewAdapter;
 import com.Netanel.glutenfreerestaurant.Model.Order;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
 import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
-import com.Netanel.glutenfreerestaurant.MyUtils.MySignal;
-import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentCartBinding;
-import com.chinalwb.slidetoconfirmlib.ISlideListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
