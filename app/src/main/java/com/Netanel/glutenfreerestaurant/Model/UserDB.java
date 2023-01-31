@@ -60,19 +60,12 @@ public class UserDB {
     }
 
     public void addOrder(Order order){
-        allOrders.add(order);
+
+        allOrders.add(0,order);
     }
 
 
     public void setAllOrders(ArrayList<Order> allOrders) {
         this.allOrders = allOrders;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDB{" +
-                "allOrders=" + allOrders +
-                ", currentOrder=" + currentOrder +
-                '}';
     }
 }

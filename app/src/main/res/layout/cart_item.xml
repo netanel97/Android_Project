@@ -47,8 +47,7 @@
             android:autoSizeTextType="uniform"
             android:text="price"
             android:textSize="20sp"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/cart_BTN_deleteItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +55,10 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="15dp"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_delete"/>
+            android:backgroundTint="@color/purple_700"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_delete"/>
+
 
         <View
             android:id="@+id/redpoint"

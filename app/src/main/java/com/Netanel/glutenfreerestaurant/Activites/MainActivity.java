@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Triggered the FB with Query and check if the user already exists
      * if the user exists it will change to boolean isNewUser to false

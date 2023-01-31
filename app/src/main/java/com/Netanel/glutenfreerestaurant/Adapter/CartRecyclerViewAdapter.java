@@ -12,6 +12,7 @@ import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.R;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -76,7 +77,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         private ImageView cart_IMG_FoodItem;
         private MaterialTextView cart_LBL_FoodName;
         private MaterialTextView cart_LBL_price;
-        private FloatingActionButton cart_BTN_deleteItem;
+        private ExtendedFloatingActionButton cart_BTN_deleteItem;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);

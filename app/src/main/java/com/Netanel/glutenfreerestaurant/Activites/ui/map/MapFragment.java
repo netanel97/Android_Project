@@ -32,7 +32,8 @@ public class MapFragment extends Fragment {
     private Handler handler;
     private int currentPosition = 0;
     private Runnable r;
-    private final long Delay = 60000; //1 min
+    private final long Delay = 10000; //1 min
+    private int counter = - 1;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,7 +66,7 @@ public class MapFragment extends Fragment {
      */
     private int calcTimeOrder() {
         int currentOrder = getArguments().getInt(Constants.ORDER_NUMBER);
-        Log.d("bdika",""+(int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60);
+//        return ++counter;
         return (int) (System.currentTimeMillis() - UserDB.getInstance().getAllOrders().get(currentOrder).getTimeStamp())/1000/60;
     }
 

@@ -6,17 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/offwhite"
 
-    tools:context=".Activites.SplashActivity">
+    tools:context=".Activites.PaymentSplash">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+        android:id="@+id/animation_view_creditcard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        app:lottie_rawRes="@raw/glutenfree"
-        app:lottie_speed="0.5"
-        />
-
-
+        app:lottie_rawRes="@raw/creditcard"
+        app:lottie_speed="0.5"/>
 
 </RelativeLayout>
