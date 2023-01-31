@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-
 import com.Netanel.glutenfreerestaurant.Model.Food;
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
 import com.Netanel.glutenfreerestaurant.MyUtils.Constants;
-import com.Netanel.glutenfreerestaurant.MyUtils.FireBaseOperations;
 import com.Netanel.glutenfreerestaurant.MyUtils.MySignal;
 import com.Netanel.glutenfreerestaurant.R;
 import com.Netanel.glutenfreerestaurant.databinding.FragmentFoodItemBinding;

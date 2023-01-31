@@ -1,5 +1,9 @@
 package com.Netanel.glutenfreerestaurant.Activites.ui.map;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -9,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.Netanel.glutenfreerestaurant.Model.UserDB;
@@ -18,8 +23,11 @@ import com.Netanel.glutenfreerestaurant.databinding.MapFragmentBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -72,8 +80,9 @@ public class MapFragment extends Fragment {
 
     public void setMapLocation(GoogleMap googleMap) {
         googleMap.clear();
+
         googleMap.addMarker(new MarkerOptions()
-                .position(locationArrayList.get(currentPosition)).title("Driver"));
+                .position(locationArrayList.get(currentPosition)).title("Driver")).setIcon(bitmapDescriptorFromVector(getContext(), R.drawable.driver));
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(locationArrayList.get(currentPosition))      // Sets the center of the map to location user
                 .zoom(15)                   // Sets the zoom
@@ -101,4 +110,15 @@ public class MapFragment extends Fragment {
         super.onResume();
 
     }
+
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
 }
