@@ -7,10 +7,10 @@
 [Firebase-url]: https://firebase.google.com/
 
 ## About
-Nus-mv offers food deliveries to the customer's home and tracking option to your location.
-The application was build as part of the android app development course.
-The restaurant offers gluten-free food,
-## Build With
+Nus-mv offers food deliveries to the customer's home and tracking options to your location.
+The application was built as part of the android app development course.
+The restaurant offers gluten-free food.
+## Built With
 
 * [![Android.java]][Android-url]
 * [![Firebase]][Firebase-url]
